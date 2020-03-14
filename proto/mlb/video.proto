@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+import "proto/mlb/shared.proto";
+
+package mlb;
+
+service Video {
+    // 将笔迹和音频制作为一个视频
+    rpc Build(BuildRequest) returns (BuildResponse) {}
+}
+
+// 构建回复
+message BuildResponse{ 
+    // 状态
+    Status status = 1;
+    // 任务ID
+    string taskID = 2;
+}
+
+// 构建请求
+message BuildRequest { 
+    // 笔迹
+    bytes pen = 1;
+    // 音频文件地址, 以http://或https://开始
+    string audio = 2;
+}
