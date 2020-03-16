@@ -35,5 +35,5 @@ message BuildRequest {
     // 视频开始的时间戳，单位毫秒
     int64 timestamp = 3;
     // 合成视频的长度，单位毫秒
-    int32 duration = 4;
+    int64 duration = 4;
 }
