@@ -17,10 +17,19 @@ message BuildResponse{
     string taskID = 2;
 }
 
+
+// 笔记页
+message Page {
+    // 页码
+    int32 index = 1; 
+    // 笔迹
+    bytes handwriting= 2;
+}
+
 // 构建请求
 message BuildRequest { 
-    // 笔迹
-    bytes pen = 1;
+    // 笔记页内容
+    repeated Page page = 1;
     // 音频文件地址, 以http://或https://开始
     string audio = 2;
 }
