@@ -32,4 +32,6 @@ message BuildRequest {
     repeated Page page = 1;
     // 音频文件地址, 以http://或https://开始
     string audio = 2;
+    // 合成视频的长度，单位毫秒
+    int32 duration =3;
 }
