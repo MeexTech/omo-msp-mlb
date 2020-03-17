@@ -40,6 +40,8 @@ message QueryResponse {
     int64 createdAt = 10;
     // 任务更新时间
     int64 updatedAt = 11;
+    // 构建日志
+    string buildLog = 12;
 }
 
 // 取消请求
