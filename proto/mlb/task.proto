@@ -36,6 +36,9 @@ message QueryResponse {
     BuildStatus buildStatus = 2;
     // 视频的存放地址，仅当构建成功时有值
     string url = 3;
+    // 封面的存放地址，仅当构建成功时有值
+    string cover = 4;
+    // 任务创建时间
     // 任务创建时间
     int64 createdAt = 10;
     // 任务更新时间
