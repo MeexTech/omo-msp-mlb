@@ -30,10 +30,12 @@ message Page {
 message BuildRequest { 
     // 笔记页内容
     repeated Page page = 1;
+    // 笔记事件, json格式
+    repeated string event = 2;
     // 音频文件地址, 以http://或https://开始
-    string audio = 2;
+    string audio = 3;
     // 视频开始的时间戳，单位毫秒
-    int64 timestamp = 3;
+    int64 timestamp = 4;
     // 合成视频的长度，单位毫秒
-    int64 duration = 4;
+    int64 duration = 5;
 }
