@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package mlb;
 
-// 状态
+// 响应状态
 message Status {
     // 状态码，0代表正常
     int32 code = 1;  
@@ -10,3 +10,30 @@ message Status {
     string message = 2;
 }
 
+// 构建状态
+enum BuildStatus
+{
+    PENDING = 0;  // 等待中
+    INPROGRESS= 1;  // 处理中
+    SUCCESS = 2;  // 成功
+    FAILED = 3;   // 失败
+    CANCELED = 4; // 取消
+}
+
+// 任务实体
+message TaskEntity {
+    // 唯一标识码
+    string uuid = 1;
+    // 创建时间
+    int64 createdAt = 2;
+    // 更新时间
+    int64 updatedAt = 3;
+    // 构建状态
+    int32 status = 4;
+    // 处理器
+    string handler = 5;
+    // 元数据
+    string meta = 6;
+    // 日志
+    string log = 7;
+}

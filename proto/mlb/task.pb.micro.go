@@ -38,6 +38,10 @@ type TaskService interface {
 	Query(ctx context.Context, in *QueryRequest, opts ...client.CallOption) (*QueryResponse, error)
 	// 取消
 	Cancel(ctx context.Context, in *CancelRequest, opts ...client.CallOption) (*CancelResponse, error)
+	// 获取队列
+	FetchQueue(ctx context.Context, in *FetchRequest, opts ...client.CallOption) (*FetchResponse, error)
+	// 获取历史
+	FetchHistory(ctx context.Context, in *FetchRequest, opts ...client.CallOption) (*FetchResponse, error)
 }
 
 type taskService struct {
@@ -72,6 +76,26 @@ func (c *taskService) Cancel(ctx context.Context, in *CancelRequest, opts ...cli
 	return out, nil
 }
 
+func (c *taskService) FetchQueue(ctx context.Context, in *FetchRequest, opts ...client.CallOption) (*FetchResponse, error) {
+	req := c.c.NewRequest(c.name, "Task.FetchQueue", in)
+	out := new(FetchResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *taskService) FetchHistory(ctx context.Context, in *FetchRequest, opts ...client.CallOption) (*FetchResponse, error) {
+	req := c.c.NewRequest(c.name, "Task.FetchHistory", in)
+	out := new(FetchResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Task service
 
 type TaskHandler interface {
@@ -79,12 +103,18 @@ type TaskHandler interface {
 	Query(context.Context, *QueryRequest, *QueryResponse) error
 	// 取消
 	Cancel(context.Context, *CancelRequest, *CancelResponse) error
+	// 获取队列
+	FetchQueue(context.Context, *FetchRequest, *FetchResponse) error
+	// 获取历史
+	FetchHistory(context.Context, *FetchRequest, *FetchResponse) error
 }
 
 func RegisterTaskHandler(s server.Server, hdlr TaskHandler, opts ...server.HandlerOption) error {
 	type task interface {
 		Query(ctx context.Context, in *QueryRequest, out *QueryResponse) error
 		Cancel(ctx context.Context, in *CancelRequest, out *CancelResponse) error
+		FetchQueue(ctx context.Context, in *FetchRequest, out *FetchResponse) error
+		FetchHistory(ctx context.Context, in *FetchRequest, out *FetchResponse) error
 	}
 	type Task struct {
 		task
@@ -103,4 +133,12 @@ func (h *taskHandler) Query(ctx context.Context, in *QueryRequest, out *QueryRes
 
 func (h *taskHandler) Cancel(ctx context.Context, in *CancelRequest, out *CancelResponse) error {
 	return h.TaskHandler.Cancel(ctx, in, out)
+}
+
+func (h *taskHandler) FetchQueue(ctx context.Context, in *FetchRequest, out *FetchResponse) error {
+	return h.TaskHandler.FetchQueue(ctx, in, out)
+}
+
+func (h *taskHandler) FetchHistory(ctx context.Context, in *FetchRequest, out *FetchResponse) error {
+	return h.TaskHandler.FetchHistory(ctx, in, out)
 }

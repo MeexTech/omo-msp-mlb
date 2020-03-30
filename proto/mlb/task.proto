@@ -10,16 +10,10 @@ service Task {
   rpc Query(QueryRequest) returns (QueryResponse) {}
   // 取消
   rpc Cancel(CancelRequest) returns (CancelResponse) {}
-}
-
-// 构建状态
-enum BuildStatus
-{
-    PENDING = 0;  // 等待中
-    INPROGRESS= 1;  // 处理中
-    SUCCESS = 2;  // 成功
-    FAILED = 3;   // 失败
-    CANCELED = 4; // 取消
+  // 获取队列
+  rpc FetchQueue(FetchRequest) returns (FetchResponse) {}
+  // 获取历史
+  rpc FetchHistory(FetchRequest) returns (FetchResponse) {}
 }
 
 // 查询请求
@@ -57,4 +51,20 @@ message CancelRequest {
 message CancelResponse { 
     // 状态
     Status status = 1;
+}
+
+// 获取请求
+message FetchRequest { 
+    // 开始时间
+    int64 startTime = 1;
+    // 结束时间
+    int64 endTime = 2;
+}
+
+// 获取回复
+message FetchResponse { 
+    // 状态
+    Status status = 1;
+    // 任务列表
+    repeated TaskEntity task = 2;
 }
