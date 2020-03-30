@@ -55,10 +55,13 @@ message CancelResponse {
 
 // 获取请求
 message FetchRequest { 
-    // 开始时间
+    // 开始时间, 单位秒
     int64 startTime = 1;
-    // 结束时间
+    // 结束时间, 单位秒
     int64 endTime = 2;
+    // 处理器
+    // 有效值：BuildVideo
+    string handler = 3;
 }
 
 // 获取回复

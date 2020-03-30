@@ -13,11 +13,12 @@ message Status {
 // 构建状态
 enum BuildStatus
 {
-    PENDING = 0;  // 等待中
-    INPROGRESS= 1;  // 处理中
-    SUCCESS = 2;  // 成功
-    FAILED = 3;   // 失败
-    CANCELED = 4; // 取消
+    NONE = 0,
+    PENDING = 1;  // 等待中
+    INPROGRESS= 2;  // 处理中
+    SUCCESS = 3;  // 成功
+    FAILED = 4;   // 失败
+    CANCELED = 5; // 取消
 }
 
 // 任务实体
@@ -29,7 +30,7 @@ message TaskEntity {
     // 更新时间
     int64 updatedAt = 3;
     // 构建状态
-    int32 status = 4;
+    BuildStatus status = 4;
     // 处理器
     string handler = 5;
     // 元数据
