@@ -27,18 +27,18 @@ message Page {
 
 // 构建请求
 message BuildRequest {
-  // 笔记页内容
-  repeated Page page = 1;
-  // 笔记事件, json格式
-  repeated string event = 2;
-  // 音频文件地址, 以http://或https://开始
-  string audio = 3;
-  // 视频开始的时间戳，单位毫秒
-  int64 timestamp = 4;
-  // 合成视频的长度，单位毫秒
-  int64 duration = 5;
-  // 数据版本
-  string version = 6;
-  // 笔迹点长度
-  int32 dotHexLength = 7;
+  repeated Page page = 1;    // 笔记页内容
+  repeated string event = 2; // 笔记事件, json格式
+  string audio = 3;          // 音频文件地址, 以http://或https://开始
+  int64 timestamp = 4;       // 视频开始的时间戳，单位毫秒
+  int64 duration = 5;        // 合成视频的长度，单位毫秒
+  string version = 6;        // 数据版本
+  int32 dotHexLength = 7;    // 笔迹点度
+  int32 paperWidth = 8;      // 纸张宽度, 单位为毫米
+  int32 paperHeight = 9;     // 纸张高度, 单位为毫米
+  int32 imageWidth = 10;     // 图片宽度, 单位为像素
+  int32 imageHeight = 11;    // 图片高度, 单位为像素
+  float penSize = 12;        // 笔迹粗细， 单位为像素
+  int32 clipSize = 13;       // 裁剪框，单位为像素
+  int32 paddingSize = 14;    // 裁剪后填充的尺寸
 }
